@@ -11,7 +11,7 @@ namespace AddressBookADO
         public string address { get; set; }
         public string city { get; set; }
         public string stateName { get; set; }
-        public string zipCode { get; set; }
+        public int zipCode { get; set; }
         public double phonenum { get; set; }
         public string emailId { get; set; }
         public string addrBookName { get; set; }

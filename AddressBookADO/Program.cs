@@ -8,7 +8,39 @@ namespace AddressBookADO
         {
             Console.WriteLine("Hello World in Address Book ADO!");
             AddressBookRepo addressBookRepo = new AddressBookRepo();
-            addressBookRepo.RetrieveData();
+            AddressBookModel addrBook = new AddressBookModel();
+            Console.WriteLine("1.Connect to Databse And Retrieve the data from sql server");
+            Console.WriteLine("2. Insert new Contacts to Address Book");
+            int option = Convert.ToInt32(Console.ReadLine());
+            switch (option)
+            {
+                case 1:
+                    addressBookRepo.RetrieveData();
+                    break;
+                case 2:
+                    Console.WriteLine("Enter First Name: ");
+                    addrBook.firstName = Console.ReadLine();
+                    Console.WriteLine("Enter Last Name: ");
+                    addrBook.lastName = Console.ReadLine();
+                    Console.WriteLine("Enter Address : ");
+                    addrBook.address = Console.ReadLine();
+                    Console.WriteLine("Enter City : ");
+                    addrBook.city = Console.ReadLine();
+                    Console.WriteLine("Enter State Name: ");
+                    addrBook.stateName = Console.ReadLine();
+                    Console.WriteLine("Enter ZIP Code : ");
+                    addrBook.zipCode =Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Enter Phone number : ");
+                    addrBook.phonenum = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Enter EMail ID : ");
+                    addrBook.emailId = Console.ReadLine();
+                    Console.WriteLine("Enter Address Book Name : ");
+                    addrBook.addrBookName = Console.ReadLine();
+                    Console.WriteLine("Enter Relation Type : ");
+                    addrBook.relationType = Console.ReadLine();
+                    addressBookRepo.InsertIntoTable(addrBook);
+                    break;
+            }
         }
     }
 }

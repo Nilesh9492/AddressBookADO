@@ -18,7 +18,7 @@ namespace AddressBookADO
             addressBook.address = Convert.ToString(sqlDataReader["Address"]);
             addressBook.city = Convert.ToString(sqlDataReader["City"]);
             addressBook.stateName = Convert.ToString(sqlDataReader["StateName"]);
-            addressBook.zipCode = Convert.ToString(sqlDataReader["ZipCode"]);
+            addressBook.zipCode = Convert.ToInt32(sqlDataReader["ZipCode"]);
             addressBook.phonenum = Convert.ToDouble(sqlDataReader["Phonenum"]);
             addressBook.emailId = Convert.ToString(sqlDataReader["EmailId"]);
             addressBook.addrBookName = Convert.ToString(sqlDataReader["AddressBookName"]);
@@ -48,6 +48,36 @@ namespace AddressBookADO
 
                 }
                 sqlDataReader.Close();
+            }
+            return count;
+        }
+        public int InsertIntoTable(AddressBookModel addressBook)
+        {
+            int count = 0;
+            using (sqlConnection)
+            {
+                SqlCommand sqlCommand = new SqlCommand("dbo.InsertTable", this.sqlConnection);
+
+                sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@FirstName", addressBook.firstName);
+                sqlCommand.Parameters.AddWithValue("@LastName", addressBook.lastName);
+                sqlCommand.Parameters.AddWithValue("@Address", addressBook.address);
+                sqlCommand.Parameters.AddWithValue("@City", addressBook.city);
+                sqlCommand.Parameters.AddWithValue("@StateName", addressBook.stateName);
+                sqlCommand.Parameters.AddWithValue("@ZipCode", addressBook.zipCode);
+                sqlCommand.Parameters.AddWithValue("@Phonenum", addressBook.phonenum);
+                sqlCommand.Parameters.AddWithValue("@EmailId", addressBook.emailId);
+                sqlCommand.Parameters.AddWithValue("@AddressBookName", addressBook.addrBookName);
+                sqlCommand.Parameters.AddWithValue("@RelationType", addressBook.relationType);
+
+                sqlConnection.Open();
+
+                int result = sqlCommand.ExecuteNonQuery();
+                if (result != 0)
+                {
+                    count++;
+                    Console.WriteLine("Inserted Successfully");
+                }
             }
             return count;
         }

@@ -150,6 +150,39 @@ namespace AddressBookADO
             }
             return count;
         }
+        public string RetrieveCountByStateAndCity(AddressBookModel addressBook)
+        {
+            string list = null;
+            try
+            {
+                using (sqlConnection)
+                {
+                    string query = @"Select Count(*) As Count, StateName, City from Address_Book_Table group by StateName,City";
+                    SqlCommand sqlCommand = new SqlCommand(query, this.sqlConnection);
+                    sqlConnection.Open();
+                    int result = sqlCommand.ExecuteNonQuery();
+                    SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+                    if (sqlDataReader.HasRows)
+                    {
+                        while (sqlDataReader.Read())
+                        {
+
+                            Console.WriteLine("Count :{0}\t StateName:{1}\t City :{2}\t", sqlDataReader[0], sqlDataReader[1], sqlDataReader[2]);
+                            list += sqlDataReader[0] + " " + sqlDataReader[1] + " " + sqlDataReader[2] + " ";
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+            return list;
+        }
     }
 }
 

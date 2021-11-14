@@ -98,5 +98,24 @@ namespace AddressBookADO
             }
             return count;
         }
+        public int DeleteContact(AddressBookModel addressBook)
+        {
+            int count = 0;
+            using (sqlConnection)
+            {
+                string query = @"delete from Address_Book_Table where FirstName=niles";
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlConnection.Open();
+                int result = sqlCommand.ExecuteNonQuery();
+                if (result != 0)
+                {
+                    count++;
+                    Console.WriteLine("Deleted SuccessFully");
+                }
+            }
+            return count;
+
+        }
     }
 }
+

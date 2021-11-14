@@ -81,5 +81,22 @@ namespace AddressBookADO
             }
             return count;
         }
+        public int EditExistingContact(AddressBookModel addressBook)
+        {
+            int count = 0;
+            using (sqlConnection)
+            {
+                string query = @"update Address_Book_Table set EmailId='nilesh@gmail.com' where FirstName='Nilesh'";
+                SqlCommand sqlCommand = new SqlCommand(query, this.sqlConnection);
+                sqlConnection.Open();
+                int result = sqlCommand.ExecuteNonQuery();
+                if (result != 0)
+                {
+                    count++;
+                    Console.WriteLine("Updated SuccessFully");
+                }
+            }
+            return count;
+        }
     }
 }

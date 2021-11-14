@@ -13,6 +13,7 @@ namespace AddressBookADO
             Console.WriteLine("2. Insert new Contacts to Address Book");
             Console.WriteLine("3. Edit Existing Contact");
             Console.WriteLine("4. Delete Contact");
+            Console.WriteLine("5. Retrieve Person Based on City or State");
             int option = Convert.ToInt32(Console.ReadLine());
             switch (option)
             {
@@ -47,6 +48,9 @@ namespace AddressBookADO
                     break;
                 case 4:
                     addressBookRepo.DeleteContact(addrBook);
+                    break;
+                case 5:
+                    addressBookRepo.RetrievePersonBasedOnStateAndCity(addrBook);
                     break;
             }
         }

@@ -116,6 +116,40 @@ namespace AddressBookADO
             return count;
 
         }
+        public int RetrievePersonBasedOnStateAndCity(AddressBookModel addressBook)
+        {
+            int count = 0;
+            try
+            {
+                using (sqlConnection)
+                {
+                    string query = @"Select FirstName,LastName from Address_Book_Table where City = 'Dhule' or StateName = 'mh'";
+                    SqlCommand sqlCommand = new SqlCommand(query, this.sqlConnection);
+                    sqlConnection.Open();
+                    int result = sqlCommand.ExecuteNonQuery();
+                    SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+                    if (sqlDataReader.HasRows)
+                    {
+                        while (sqlDataReader.Read())
+                        {
+                            count++;
+                            addressBook.firstName = Convert.ToString(sqlDataReader["FirstName"]);
+                            addressBook.lastName = Convert.ToString(sqlDataReader["LastName"]);
+                            Console.WriteLine("FirstName :{0}\t LastName:{1}\t ", addressBook.firstName, addressBook.lastName);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+            return count;
+        }
     }
 }
 

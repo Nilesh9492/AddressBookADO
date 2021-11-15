@@ -15,6 +15,7 @@ namespace AddressBookADO
             Console.WriteLine("4. Delete Contact");
             Console.WriteLine("5. Retrieve Person Based on City or State");
             Console.WriteLine("6. Retrieve Count of address book by City and State");
+            Console.WriteLine("7. Retrieve Person by Sorting Alphabetically for a given city. ");
             int option = Convert.ToInt32(Console.ReadLine());
             switch (option)
             {
@@ -55,6 +56,9 @@ namespace AddressBookADO
                     break;
                 case 6:
                     addressBookRepo.RetrieveCountByStateAndCity(addrBook);
+                    break;
+                case 7:
+                    addressBookRepo.RetrievePersonbyOrder(addrBook);
                     break;
             }
         }
